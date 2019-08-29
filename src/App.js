@@ -1,24 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [state, setState] = useState({});
+
+  const asyncRequest = async () => {
+    const response = await fetch("/.netlify/functions/shuffle-tweets");
+
+    if (response.ok) {
+      const json = await response.json();
+      setState({ winner: json.winners[0] === null ? [] : json.winners[0] });
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        height: "100vh",
+        textAlign: "center"
+      }}
+    >
+      {state.winner && (
+        <div style={{ marginBottom: 24 }}>
+          <img
+            src={state.winner.avatar}
+            alt="Winner!"
+            style={{ borderRadius: "50%" }}
+            width="100"
+          />
+          <h2 style={{ fontSize: 48 }}>{state.winner.handler}</h2>
+        </div>
+      )}
+
+      <div>
+        <button
+          style={{
+            backgroundColor: "#378aae",
+            borderRadius: 5,
+            color: "white",
+            appearance: "none",
+            border: 0,
+            fontSize: 24,
+            fontWeight: 600,
+            padding: "16px 24px"
+          }}
+          onClick={() => asyncRequest()}
         >
-          Learn React
-        </a>
-      </header>
+          Start Raffle!
+        </button>
+      </div>
     </div>
   );
 }
