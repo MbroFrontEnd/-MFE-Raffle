@@ -20,7 +20,7 @@ function getWinners(number) {
       tweets,
       response
     ) {
-      const ignoredUsers = ["@middlesbroughfe", "@lewismorris"];
+      const ignoredUsers = ["@middlesbroughfe", "@lewismorris", "@sandradolly"];
 
       let entrants = tweets.statuses
         .map(tweet => {
