@@ -6,7 +6,7 @@
     "axios": "^0.19.0",
     "bluebird": "^3.5.5",
     "http-proxy-middleware": "^0.19.1",
-    "moment-timezone": "^0.5.26",
+    "moment-timezone": "^0.5.35",
     "netlify-lambda": "^1.6.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
